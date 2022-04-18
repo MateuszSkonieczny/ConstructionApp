@@ -1,0 +1,228 @@
+{
+	"main-page": {
+		"content": "Main Page"
+	},
+	"nav": {
+		"main-page": "Main Page",
+		"firms": "Firms",
+		"estates": "Estates",
+		"constructions": "Constructions",
+		"equipment": "Tools",
+		"firmEquipment": "Firms tools",
+		"szukaj": "Search"
+	},
+	"list": {
+		"actions": {
+			"title": "Actions",
+			"details": "Details",
+			"edit": "Edit",
+			"delete": "Delete"
+		}
+	},
+	"form": {
+		"actions": {
+			"return": "Return",
+			"edit": "Edit",
+			"cancel": "Cancel",
+			"opinions": "Opinions"
+		},
+		"placeholders": {
+			"symbolLimit": "2-60-symbols",
+			"symbolLimit1": "2-50-symbols",
+			"numLimit": "number-1-50",
+			"numLimit1": "number-1-100",
+			"symbolLimit255": "max-255-symbols"
+		}
+	},
+	"firm": {
+		"fields": {
+			"Nazwa": "Name",
+			"Adres": "Address",
+			"Haslo": "Password"
+		},
+		"list": {
+			"title": "Firms",
+			"addNew": "Add new firm",
+			"noData": "No firms in database",
+			"pageTitle": "List of firms"
+		},
+		"form": {
+			"budowy": "Constructions details",
+			"add": {
+				"pageTitle": "Adding a new firm",
+				"btnLabel": "Add the firm"
+			},
+			"edit": {
+				"pageTitle": "Editing a firm",
+				"btnLabel": "Save changes",
+				"password": {
+					"changePassword": "Change password"
+				}
+			},
+			"details": {
+				"pageTitle": "Firm details"
+			},
+			"sprzety": "Tools"
+		}
+	},
+	"estate": {
+		"fields": {
+			"Adres": "Address",
+			"BuildingsNum": "Buildings num"
+		},
+		"list": {
+			"title": "Estates",
+			"addNew": "Add new estate",
+			"noData": "No estates in database",
+			"pageTitle": "List of estates"
+		},
+		"form": {
+			"budowy": "Constructions details",
+			"add": {
+				"pageTitle": "Adding a new estate",
+				"btnLabel": "Add the estate"
+			},
+			"edit": {
+				"pageTitle": "Editing a estate",
+				"btnLabel": "Save changes"
+			},
+			"details": {
+				"pageTitle": "Estate details"
+			}
+		}
+	},
+	"constructions": {
+		"fields": {
+			"firm": "Firm",
+			"estate": "Estate",
+			"managerName": "Manager name",
+			"managerLastNameBig": "Manager last name",
+			"managerLastNameShort": "Man. last name",
+			"endDate": "End date",
+			"chooseFirm": "--Choose firm--",
+			"chooseEstate": "--Choose estate--"
+		},
+		"list": {
+			"title": "Constructions",
+			"addNew": "Add new constructions",
+			"noData": "No constructions in database",
+			"pageTitle": "List of constructions"
+		},
+		"form": {
+			"add": {
+				"pageTitle": "Adding a new construcion",
+				"btnLabel": "Add the construcion"
+			},
+			"edit": {
+				"pageTitle": "Editing a construcion",
+				"btnLabel": "Save changes"
+			},
+			"details": {
+				"pageTitle": "Construcion details"
+			}
+		}
+	},
+	"validationMessage": {
+		"required": "Field required",
+		"s1": "Field must contain from ",
+		"s2": " to ",
+		"s3": " characters",
+		"l": "Field must contain a number from ",
+		"d": "Wrong date format",
+		"b": "Form contains errors"
+	},
+	"firmEquipments": {
+		"fields": {
+			"tool": "Tool",
+			"quantity": "Quantity",
+			"borrowed": "Borrowed",
+			"firm": "Firm",
+			"chooseFirm": "--Choose Firm--",
+			"chooseEquipment": "--Choose Equipment--"
+		},
+		"list": {
+			"addNew": "Add new equipment to firm",
+			"pageTitle": "Firms equipments"
+		},
+		"form": {
+			"add": {
+				"pageTitle": "New firm equipment",
+				"btnLabel": "Add firm equipment"
+			},
+			"details": {
+				"pageTitle": "Details of  firm equipment"
+			},
+			"edit": {
+				"pageTitle": "Editing firm equipment",
+				"btnLabel": "Edit firm equipment"
+			}
+		}
+	},
+	"equipment": {
+		"form": {
+			"details": {
+				"pageTitle": "Equipment details"
+			},
+			"feq": "Firms using chosen equipment",
+			"edit": {
+				"pageTitle": "Editing equipment",
+				"btnLabel": "Edit equipment"
+			},
+			"add": {
+				"pageTitle": "New equipment",
+				"btnLabel": "Add equipment"
+			}
+		},
+		"fields": {
+			"Nazwa": "Name",
+			"SprzetCiezki": "Heavy equipment"
+		},
+		"list": {
+			"addNew": "Add new equipment",
+			"pageTitle": "Equipments"
+		}
+	},
+	"login": {
+		"loggingIn": "Logging in",
+		"nazwa": "Name",
+		"haslo": "Passsword",
+		"login": "log in",
+		"admin": {
+			"welcome": "Welcome Admin!",
+			"changePassword": "Change password"
+		},
+		"logout": "Log out",
+		"loggedAS": "Logged as"
+	},
+	"auth": {
+		"form": {
+			"incorrect": "Name of password is incorrect"
+		}
+	},
+	"admin": {
+		"form": {
+			"newPassword": "New password",
+			"changePassword": "Change password"
+		}
+	},
+	"opinion": {
+		"form": {
+			"add": {
+				"pageTitle": "Opinions",
+				"btnLabel": "Add opinion"
+			}
+		},
+		"list": {
+			"opinie": "Opinions"
+		},
+		"fields": {
+			"Tresc": "Content"
+		}
+	},
+	"password": {
+		"fields": {
+			"NoweHaslo": "New password",
+			"PotwierdzHaslo": "Confirm new password"
+		}
+	}
+}

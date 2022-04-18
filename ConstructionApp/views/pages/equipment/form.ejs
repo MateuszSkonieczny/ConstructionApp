@@ -1,0 +1,102 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <div style="display: none">
+        <span id="errorMessage-required"><%= __('validationMessage.required') %></span>
+        <span id="errorMessage-s1"><%= __('validationMessage.s1') %></span>
+        <span id="errorMessage-s2"><%= __('validationMessage.s2') %></span>
+        <span id="errorMessage-s3"><%= __('validationMessage.s3') %></span>
+        <span id="errorMessage-b"><%= __('validationMessage.b') %></span>
+    </div>
+    <h2><%= pageTitle %></h2>
+    <!--    onsubmit="return validateEquipmentForm();"-->
+    <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateEquipmentForm();">
+        <input type="hidden" name="equipmentId" value="<%= equipment.Id %>">
+
+        <label for="Nazwa"><%= __('equipment.fields.Nazwa') %>: <span class="symbol-required">*</span></label>
+        <input type="text" name="Nazwa" id="Nazwa" placeholder=<%= __('form.placeholders.symbolLimit1') %> value="<%= equipment.Nazwa %>" <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('Nazwa')) ? 'error-input' : '' %>" required/>
+
+        <span id="errorNazwa" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Nazwa'))) { %>
+                <%= validationErrors.find(e => e.path.includes('Nazwa')).message %>
+            <% } %>
+        </span>
+
+        <label for="SprzetCiezki"><%= __('equipment.fields.SprzetCiezki') %>: </label>
+        <input type="checkbox" name="SprzetCiezki" id="SprzetCiezki" <%= equipment.SprzetCiezki ? 'checked' : '' %> <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('SprzetCiezki')) ? 'error-input' : '' %>" required/>
+
+        <span id="errorSprzetCiezki" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('SprzetCiezki'))) { %>
+                <%= validationErrors.find(e => e.path.includes('SprzetCiezki')).message %>
+            <% } %>
+        </span>
+
+        <%if (formMode === 'showDetails' && (admin)) { %>
+            <div class="form-buttons">
+                <a href="/equipments/edit/<%= equipment.Id %>" class="list-actions-button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+
+            <%if (formMode !== 'showDetails') { %>
+            <input type="submit" class="form-button-submit" value="<%-btnLabel%>"/>
+            <a href="/equipments" class="form-button-cancel"><%= __('form.actions.cancel') %></a>
+            <% } else { %>
+                <a href="/equipments" class="form-button-cancel"><%= __('form.actions.return') %></a>
+            <% } %>
+        </div>
+    </form>
+
+
+
+    <%if (formMode !== 'createNew') { %>
+        <%let f = false%>
+        <%if (loggedUser) {%>
+            <% for (let feq of firmEquipments) { %>
+                <% if (loggedUser.Nazwa === feq.fNazwa) { %>
+                <%f=true%>
+                <% } %>
+            <% } %>
+        <%}%>
+    <%if (admin || (loggedUser && f)) { %>
+
+        <div></div>
+        <h2><%= __('equipment.form.feq') %></h2>
+        <div></div>
+
+        <div>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th><%= __('firmEquipments.fields.firm') %></th>
+                    <th><%= __('firmEquipments.fields.quantity') %></th>
+                    <th>Link</th>
+                </tr>
+                </thead>
+
+
+                <tbody>
+                <% for (let feq of firmEquipments) { %>
+                    <%if (admin || (loggedUser.Nazwa === feq.fNazwa)) { %>
+                        <tr>
+                            <td><%= feq.fNazwa %></td>
+                            <td><%= feq.Ilosc %></td>
+                            <td><a href="/firmEquipments/details/<%= feq.sf_Id %>">click</a></td>
+                        </tr>
+                    <% } %>
+                <% } %>
+                </tbody>
+
+
+            </table>
+        </div>
+    <% } %>
+    <% } %>
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

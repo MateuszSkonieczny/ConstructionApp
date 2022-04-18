@@ -1,0 +1,21 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <h2>Edytuj osiedle</h2>
+    <form class="form" novalidate onsubmit="return validateEstateForm();">
+        <label for="adres">Adres: <span class="symbol-required">*</span></label>
+        <input type="text" name="adres" id="adres" value="Aluzyjna 3, Warszawa" placeholder="2-60 znaków" required/>
+        <span id="errorAdres" class="errors-text"></span>
+
+        <label for="liczbabud">Liczba budynków: <span class="symbol-required">*</span></label>
+        <input type="number" name="liczbabud" id="liczbabud" value="8" placeholder="liczba 1-50" required/>
+        <span id="errorLiczbabud" class="errors-text"></span>
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <input type="submit" class="form-button-submit" value="Dodaj"/>
+            <a href="/estates" class="form-button-cancel">Anuluj</a>
+        </div>
+    </form>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

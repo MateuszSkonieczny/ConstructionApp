@@ -1,0 +1,37 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <h2>Lista osiedli</h2>
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th><%= __('estate.fields.Adres') %></th>
+                <th><%= __('estate.fields.BuildingsNum') %></th>
+                <th><%= __('list.actions.title') %></th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <% for (let estate of estates) { %>
+            <tr>
+                <td><%= estate.Adres %></td>
+                <td><%= estate.LiczbaBudynkow %></td>
+                <td>
+                    <ul class="list-actions">
+                        <li><a href="estates/details/<%= estate.Id%>" class="list-actions-button-details"><%= __('list.actions.details') %></a></li>
+                        <% if (admin) { %>
+                        <li><a href="estates/edit/<%= estate.Id%>" class="list-actions-button-edit"><%= __('list.actions.edit') %></a></li>
+                        <li><a href="estates/delete/<%= estate.Id%>" class="list-actions-button-delete"><%= __('list.actions.delete') %></a></li>
+                        <% } %>
+                    </ul>
+                </td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+    <% if (loggedUser || admin) { %>
+    <p><a href="estates/add" class="button-add"><%= __('estate.list.addNew') %></a></p>
+    <% } %>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <script type="application/javascript" src="../../js/validationCommon.js"></script>
+    <script type="application/javascript" src="../../js/validationFirmForm.js"></script>
+    <script type="application/javascript" src="../../js/validationEstateForm.js"></script>
+    <script type="application/javascript" src="../../js/validationConstructionForm.js"></script>
+    <script type="application/javascript" src="../../js/validationEquipmentForm.js"></script>
+    <script type="application/javascript" src="../../js/validationFirmEquipmentForm.js"></script>
+    <script type="application/javascript" src="../../js/validationFirmPasswordForm.js"></script>
+    <script type="application/javascript" src="../../js/validationNewFirmForm.js"></script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+    <title>Estate Constructions Demo</title>
+</head>
+<body>
+<header>
+    <h1>Estate Constructions Demo</h1>
+    <img src="/images/logo.jpg" width="150" height="150" alt="Estate Constructions Demo Logo">
+</header>
+
+<nav>
+    <ul>
+        <li><a href="/" class="<%= navLocation === 'main' ? 'active' : ''%>"><%= __('nav.main-page') %></a></li>
+        <li><a href="/firms" class="<%= navLocation === 'firm' ? 'active' : ''%>"><%= __('nav.firms') %></a></li>
+        <li><a href="/estates" class="<%= navLocation === 'estate' ? 'active' : ''%>"><%= __('nav.estates') %></a></li>
+        <% if (loggedUser || admin) { %>
+        <li><a href="/constructions" class="<%= navLocation === 'construction' ? 'active' : ''%>"><%= __('nav.constructions') %></a></li>
+        <% } %>
+        <li><a href="/equipments" class="<%= navLocation === 'equipment' ? 'active' : ''%>"><%= __('nav.equipment') %></a></li>
+        <% if (loggedUser || admin) { %>
+        <li><a href="/firmEquipments" class="<%= navLocation === 'firmEquipment' ? 'active' : ''%>"><%= __('nav.firmEquipment') %></a></li>
+        <% } %>
+        <form action="https://www.google.com/search" class="searchform" method="get" name="searchform" target="_blank">
+            <input name="sitesearch" type="hidden" value="">
+            <input autocomplete="on" class="form-control search" name="q" placeholder="Search in google" required="required"  type="text">
+            <button class="button" type="submit"><%= __('nav.szukaj') %></button>
+        </form>
+    </ul>
+
+    <ul>
+        <li><a href="/changeLang/pl" class="<%= lang == 'pl' ? 'active' : ''%>">PL</a></li>
+        <li><a href="/changeLang/en" class="<%= lang == 'en' ? 'active' : ''%>">EN</a></li>
+    </ul>
+</nav>
+
+<% if (!loggedUser && !admin) { %>
+    <div id="login">
+        <h5><%= __('login.loggingIn') %></h5>
+        <form method="post" action="/login" novalidate>
+            <label for="loginNazwa"><%= __('login.nazwa') %>:</label>
+            <input type="text" id="loginNazwa" name="Nazwa">
+
+            <label for="loginPassword"><%= __('login.haslo') %>:</label>
+            <input type="password" id="loginPassword" name="password">
+
+            <input type="submit" value="<%= __('login.login') %>">
+            <span id="loginErrors"><%= loginError ? loginError : '' %></span>
+        </form>
+    </div>
+<% } else { %>
+    <% if (loggedUser) { %>
+        <span><%= __('login.loggedAS') %> <%= loggedUser.Nazwa %></span>
+    <% } %>
+    <% if (admin) { %>
+        <span><%= __('login.admin.welcome') %></span>
+        <a href="/admin/edit/password"><%= __('login.admin.changePassword') %></a>
+    <% } %>
+    <a href="/logout"><%= __('login.logout') %></a>
+
+<% } %>

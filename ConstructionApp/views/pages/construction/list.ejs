@@ -1,0 +1,42 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <h2><%= __('constructions.list.pageTitle') %></h2>
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th><%= __('constructions.fields.firm') %></th>
+                <th><%= __('constructions.fields.estate') %></th>
+                <th><%= __('constructions.fields.managerName') %></th>
+                <th><%= __('constructions.fields.managerLastNameBig') %></th>
+                <th><%= __('constructions.fields.endDate') %></th>
+                <th><%= __('list.actions.title') %></th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <% for (let construction of constructions) { %>
+            <% if (admin || (loggedUser && loggedUser.Nazwa === construction.Nazwa)) { %>
+            <tr>
+                <td><%= construction.Nazwa %></td>
+                <td><%= construction.Adres %></td>
+                <td><%= construction.ImieManagera %></td>
+                <td><%= construction.NazwiskoManagera %></td>
+                <td><%= construction.DataZakonczenia ?
+                            new Date(construction.DataZakonczenia.getTime() - (construction.DataZakonczenia.getTimezoneOffset() * 60000)).toISOString().split("T")[0] : '' %></td>
+                <td>
+                    <ul  class="list-actions">
+                        <li><a href="constructions/details/<%= construction.Id%>" class="list-actions-button-details"><%= __('list.actions.details') %></a></li>
+                        <li><a href="constructions/edit/<%= construction.Id%>" class="list-actions-button-edit"><%= __('list.actions.edit') %></a></li>
+                        <li><a href="constructions/delete/<%= construction.Id%>"  class="list-actions-button-delete"><%= __('list.actions.delete') %></a></li>
+                    </ul>
+                </td>
+            </tr>
+            <% } %>
+        <% } %>
+        </tbody>
+    </table>
+    <p><a href="constructions/add" class="button-add"><%= __('constructions.list.addNew') %></a></p>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

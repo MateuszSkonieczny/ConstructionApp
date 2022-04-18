@@ -1,0 +1,42 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <h2>Edytuj budowę</h2>
+    <form class="form" novalidate onsubmit="return validateConstructionForm();">
+        <label for="fid">Firma <span class="symbol-required">*</span></label>
+        <select name="fid" id="fid" required>
+            <option>--Wybierz firmę--</option>
+            <option value="1" selected>Budimex</option>
+            <option value="2">Superbud</option>
+        </select>
+
+        <span id="errorFirm" class="errors-text"></span>
+        <label for="oid">Osiedle: <span class="symbol-required">*</span></label>
+        <select name="oid" id="oid">
+            <option>--Wybierz osiedle--</option>
+            <option value="1" selected>Aluzyjna 3</option>
+            <option value="2">Nowa Warszawa 1</option>
+        </select>
+        <span id="errorEstate" class="errors-text"></span>
+
+        <label for="im">Imię managera: <span class="symbol-required">*</span></label>
+        <input type="text" name="im" id="im" value="Ahmed" placeholder="2-60 znaków" required/>
+        <span id="errorIM"></span>
+
+        <label for="nm">Nazwisko man.: <span class="symbol-required">*</span></label>
+        <input type="text" name="nm" id="nm" value="Ahmenid" placeholder="2-60 znaków" required/>
+        <span id="errorNM"></span>
+
+        <label for="dz">Data zakończenia: </label>
+        <input type="date" name="dz" id="dz" value="2009-01-02"/>
+        <span id="errorDZ"></span>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <input type="submit" class="form-button-submit" value="Dodaj"/>
+            <a href="/constructions" class="form-button-cancel">Anuluj</a>
+        </div>
+    </form>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

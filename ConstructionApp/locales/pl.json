@@ -1,0 +1,228 @@
+{
+	"main-page": {
+		"content": "Strona główna"
+	},
+	"nav": {
+		"main-page": "Strona główna",
+		"firms": "Firmy",
+		"estates": "Osiedla",
+		"constructions": "Budowy",
+		"equipment": "Sprzęty",
+		"firmEquipment": "Sprzęty firm",
+		"szukaj": "szukaj"
+	},
+	"list": {
+		"actions": {
+			"title": "Akcje",
+			"details": "Szczegóły",
+			"edit": "Edytuj",
+			"delete": "Usuń"
+		}
+	},
+	"form": {
+		"actions": {
+			"return": "Powrót",
+			"edit": "Edytuj",
+			"cancel": "Anuluj",
+			"opinions": "Opinie"
+		},
+		"placeholders": {
+			"symbolLimit": "2-60-znaków",
+			"symbolLimit1": "2-50-znaków",
+			"numLimit": "liczba-1-50",
+			"numLimit1": "liczba-1-100",
+			"symbolLimit255": "max-255-znaków"
+		}
+	},
+	"firm": {
+		"fields": {
+			"Nazwa": "Nazwa",
+			"Adres": "Adres",
+			"Haslo": "Hasło"
+		},
+		"list": {
+			"title": "Firmy",
+			"addNew": "Dodaj nową firmę",
+			"noData": "Brak firm w bazie",
+			"pageTitle": "Lista firm"
+		},
+		"form": {
+			"budowy": "Szczegóły budowy",
+			"add": {
+				"pageTitle": "Nowa firma",
+				"btnLabel": "Dodaj firmę"
+			},
+			"edit": {
+				"pageTitle": "Edycja firmy",
+				"btnLabel": "Edytuj firmę",
+				"password": {
+					"changePassword": "Zmień hasło"
+				}
+			},
+			"details": {
+				"pageTitle": "Szczegóły firmy"
+			},
+			"sprzety": "Sprzęty"
+		}
+	},
+	"estate": {
+		"fields": {
+			"Adres": "Adres",
+			"BuildingsNum": "Liczba budynków"
+		},
+		"list": {
+			"title": "Osiedla",
+			"addNew": "Dodaj nowe osiedle",
+			"noData": "Brak osiedli w bazie",
+			"pageTitle": "Lista osiedli"
+		},
+		"form": {
+			"budowy": "Szczegóły budowy",
+			"add": {
+				"pageTitle": "Nowe osiedle",
+				"btnLabel": "Dodaj osiedle"
+			},
+			"edit": {
+				"pageTitle": "Edycja osiedla",
+				"btnLabel": "Edytuj osiedle"
+			},
+			"details": {
+				"pageTitle": "Szczegóły osiedla"
+			}
+		}
+	},
+	"constructions": {
+		"fields": {
+			"firm": "Firma",
+			"estate": "Osiedle",
+			"managerName": "Imię managera",
+			"managerLastNameBig": "Nazwisko managera",
+			"managerLastNameShort": "Nazwisko man.",
+			"endDate": "Data zakończenia",
+			"chooseFirm": "--Wybierz firmę--",
+			"chooseEstate": "--Wybierz osiedle--"
+		},
+		"list": {
+			"title": "Budowy",
+			"addNew": "Dodaj nową budowę",
+			"noData": "Brak budów w bazie",
+			"pageTitle": "Lista budów"
+		},
+		"form": {
+			"add": {
+				"pageTitle": "Nowa budowa",
+				"btnLabel": "Dodaj budowę"
+			},
+			"edit": {
+				"pageTitle": "Edycja budowy",
+				"btnLabel": "Edytuj budowę"
+			},
+			"details": {
+				"pageTitle": "Szczegóły budowy"
+			}
+		}
+	},
+	"validationMessage": {
+		"required": "Pole wymagane",
+		"s1": "Pole powinno zawierać od ",
+		"s2": " do ",
+		"s3": " znaków",
+		"l": "Pole powinno zawierać liczbę od ",
+		"d": "Niewłaściwy format daty",
+		"b": "Formularz zawiera błędy"
+	},
+	"equipment": {
+		"form": {
+			"add": {
+				"pageTitle": "Nowy sprzęt",
+				"btnLabel": "Dodaj sprzęt"
+			},
+			"edit": {
+				"pageTitle": "Edycja sprzętu",
+				"btnLabel": "Edytuj sprzęt"
+			},
+			"feq": "Firmy używające sprzętu",
+			"details": {
+				"pageTitle": "Szczegóły sprzętu"
+			}
+		},
+		"fields": {
+			"Nazwa": "Nazwa",
+			"SprzetCiezki": "Sprzet ciężki"
+		},
+		"list": {
+			"pageTitle": "Sprzęty",
+			"addNew": "Dodaj nowy sprzęt"
+		}
+	},
+	"firmEquipments": {
+		"fields": {
+			"firm": "Firma",
+			"quantity": "Ilość",
+			"chooseFirm": "--Wybierz Firmę--",
+			"tool": "Sprzęt",
+			"chooseEquipment": "--Wybierz Sprzęt--",
+			"borrowed": "Wypożyczone"
+		},
+		"form": {
+			"add": {
+				"pageTitle": "Nowy sprzęt firmy",
+				"btnLabel": "Dodaj sprzęt firmy"
+			},
+			"edit": {
+				"pageTitle": "Edycja sprzętu firmy",
+				"btnLabel": "Edytuj sprzęt firmy"
+			},
+			"details": {
+				"pageTitle": "Szczegóły sprzętu firmy"
+			}
+		},
+		"list": {
+			"pageTitle": "Sprzęty firm",
+			"addNew": "Dodaj nowy sprzęt firmie"
+		}
+	},
+	"password": {
+		"fields": {
+			"NoweHaslo": "Nowe Hasło",
+			"PotwierdzHaslo": "Potwierdz Hasło"
+		}
+	},
+	"opinion": {
+		"form": {
+			"add": {
+				"pageTitle": "Opinie",
+				"btnLabel": "Dodaj opinię"
+			}
+		},
+		"list": {
+			"opinie": "Opinie"
+		},
+		"fields": {
+			"Tresc": "Treść"
+		}
+	},
+	"login": {
+		"loggingIn": "Logowanie",
+		"nazwa": "Nazwa",
+		"haslo": "Hasło",
+		"login": "Login",
+		"admin": {
+			"welcome": "Witaj Adminie!",
+			"changePassword": "Zmień hasło"
+		},
+		"logout": "wyloguj się",
+		"loggedAS": "Zalogowano jako:"
+	},
+	"auth": {
+		"form": {
+			"incorrect": "Nieprawidłowa nazwa firmy lub hasło"
+		}
+	},
+	"admin": {
+		"form": {
+			"newPassword": "Nowe hasło",
+			"changePassword": "Zmień hasło"
+		}
+	}
+}

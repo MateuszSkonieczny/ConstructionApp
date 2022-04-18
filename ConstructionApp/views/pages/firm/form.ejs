@@ -1,0 +1,131 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <div style="display: none">
+        <span id="errorMessage-required"><%= __('validationMessage.required') %></span>
+        <span id="errorMessage-s1"><%= __('validationMessage.s1') %></span>
+        <span id="errorMessage-s2"><%= __('validationMessage.s2') %></span>
+        <span id="errorMessage-s3"><%= __('validationMessage.s3') %></span>
+        <span id="errorMessage-b"><%= __('validationMessage.b') %></span>
+    </div>
+    <h2><%= pageTitle %></h2>
+<!--    onsubmit="return validateFirmForm();"-->
+    <form class="form" method="post" action="<%=formAction%>" onsubmit="return validateFirmForm();" novalidate>
+        <input type="hidden" name="firmId" value="<%= firm.Id %>">
+
+        <label for="Nazwa"><%= __('firm.fields.Nazwa') %>: <span class="symbol-required">*</span></label>
+        <input type="text" name="Nazwa" id="Nazwa" placeholder=<%= __('form.placeholders.symbolLimit') %> value="<%= firm.Nazwa %>" <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('Nazwa')) ? 'error-input' : '' %>" required/>
+
+        <span id="errorNazwa" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Nazwa'))) { %>
+                <%= validationErrors.find(e => e.path.includes('Nazwa')).message %>
+            <% } %>
+        </span>
+
+        <label for="Adres"><%= __('firm.fields.Adres') %>: <span class="symbol-required">*</span></label>
+        <input type="text" name="Adres" id="Adres" placeholder=<%= __('form.placeholders.symbolLimit') %> value="<%= firm.Adres %>" <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('Adres')) ? 'error-input' : '' %>" required/>
+
+        <span id="errorAdres" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Adres'))) { %>
+                <%= validationErrors.find(e => e.path.includes('Adres')).message %>
+            <% } %>
+        </span>
+
+        <div>
+            <a href="/opinions/<%= firm.Id %>" class="opinion"><%= __('form.actions.opinions') %></a>
+        </div>
+
+        
+        <%if (formMode === 'showDetails' && ((loggedUser && loggedUser.Id === firm.Id) || admin)) { %>
+            <div class="form-buttons">
+                <a href="/firms/edit/<%= firm.Id %>" class="list-actions-button-edit"><%= __('form.actions.edit') %></a>
+            </div>
+        <% } %>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+
+            <%if (formMode !== 'showDetails') { %>
+                <a href="/firms/edit/password/<%= firm.Id%>" class="password"><%= __('firm.form.edit.password.changePassword') %></a>
+                <input type="submit" class="form-button-submit" value="<%-btnLabel%>"/>
+                <a href="/firms" class="form-button-cancel"><%= __('form.actions.cancel') %></a>
+            <% } else { %>
+                <a href="/firms" class="form-button-cancel"><%= __('form.actions.return') %></a>
+            <% } %>
+        </div>
+    </form>
+
+    <%if (formMode !== 'createNew') { %>
+    <%if (admin || ( loggedUser && loggedUser.Nazwa === firm.Nazwa)) { %>
+
+    <div></div>
+    <h2><%= __('firm.form.budowy') %></h2>
+    <div></div>
+
+    <div>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th><%= __('constructions.fields.estate') %></th>
+                <th><%= __('constructions.fields.managerName') %></th>
+                <th><%= __('constructions.fields.managerLastNameBig') %></th>
+                <th><%= __('constructions.fields.endDate') %></th>
+                <th>Link</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let construction of constructions) { %>
+                <%if (admin || (loggedUser.Nazwa === construction.Nazwa)) { %>
+                    <tr>
+                        <td><%= construction.Adres %></td>
+                        <td><%= construction.ImieManagera %></td>
+                        <td><%= construction.NazwiskoManagera %></td>
+                        <td><%= construction.DataZakonczenia ?
+                                new Date(construction.DataZakonczenia.getTime() - (construction.DataZakonczenia.getTimezoneOffset() * 60000)).toISOString().split("T")[0] : '' %></td>
+                        <td><a href="/constructions/details/<%= construction.bud_Id %>">click</a></td>
+                    </tr>
+                <% } %>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div></div>
+    <h2><%= __('firm.form.sprzety') %></h2>
+    <div></div>
+
+    <div>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th><%= __('firmEquipments.fields.tool') %></th>
+                <th><%= __('firmEquipments.fields.quantity') %></th>
+                <th><%= __('firmEquipments.fields.borrowed') %></th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let feq of equipments) { %>
+                <%if (admin || (loggedUser.Nazwa === feq.fNazwa)) { %>
+                    <tr>
+                        <td><%= feq.sNazwa %></td>
+                        <td><%= feq.Ilosc %></td>
+                        <td><%= feq.Wypozyczone === 1 ? 'tak' : ' nie' %></td>
+                        <td><a href="/firmEquipments/details/<%= feq.sf_Id %>">click</a></td>
+                    </tr>
+                <% } %>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <% } %>
+    <% } %>
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

@@ -1,0 +1,37 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <h2><%= __('firm.list.pageTitle') %></h2>
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th><%= __('firm.fields.Nazwa') %></th>
+                <th><%= __('firm.fields.Adres') %></th>
+                <th><%= __('list.actions.title') %></th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <% for (let firm of firms) { %>
+            <tr>
+                <td><%= firm.Nazwa %></td>
+                <td><%= firm.Adres %></td>
+                <td>
+                    <ul class="list-actions">
+                        <li><a href="firms/details/<%= firm.Id%>" class="list-actions-button-details"><%= __('list.actions.details') %></a></li>
+                        <% if (admin || (loggedUser && loggedUser.Nazwa === firm.Nazwa)) { %>
+                        <li><a href="firms/edit/<%= firm.Id%>" class="list-actions-button-edit"><%= __('list.actions.edit') %></a></li>
+                        <% } %>
+                        <% if (admin) { %>
+                        <li><a href="firms/delete/<%= firm.Id%>" class="list-actions-button-delete"><%= __('list.actions.delete') %></a></li>
+                        <% } %>
+                    </ul>
+                </td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+    <p><a href="firms/add" class="button-add"><%= __('firm.list.addNew') %></a></p>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

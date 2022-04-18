@@ -1,0 +1,54 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <h2>Szczegóły osiedla</h2>
+    <form class="form">
+        <label for="adres">Adres: <span class="symbol-required">*</span></label>
+        <input type="text" name="adres" id="adres" value="Aluzyjna 3, Warszawa" disabled/>
+        <span id="errorAdres"></span>
+
+        <label for="liczbabud">Liczba budynków: <span class="symbol-required">*</span></label>
+        <input type="number" name="liczbabud" id="liczbabud" value="8" disabled/>
+        <span id="errorLiczbabud"></span>
+    </form>
+
+    <div class="form-buttons">
+        <a href="../edit/1" class="list-actions-button-edit">Edytuj</a>
+    </div>
+
+    <div></div>
+    <h2>Sczegóły budowy</h2>
+    <div></div>
+
+    <table  class="table-list">
+        <thead>
+            <tr>
+                <th>Firma</th>
+                <th>Imię menagera</th>
+                <th>Nazwisko menagera</th>
+                <th>Data zakończenia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Budimex</td>
+                <td>Andrzej</td>
+                <td>Zbychowski</td>
+                <td>2009-01-01</td>
+            </tr>
+            <tr>
+                <td>SuperBud</td>
+                <td>Albert</td>
+                <td>Muzk</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><a href="/estates" class="list-actions-button-return">Powrót</a></p>
+
+
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

@@ -1,0 +1,21 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <h2>Nowe osiedle</h2>
+    <form class="form">
+        <label for="adres">Adres: *</label>
+        <input type="text" name="adres" id="adres" class="error-input" placeholder="2-60 znaków" required/>
+        <span id="errorAdres" class="errors-text">Pole jest wymagane</span>
+
+        <label for="liczbabud">Liczba budynków: *</label>
+        <input type="number" name="liczbabud" id="liczbabud" class="error-input" placeholder="liczba 1-50" required/>
+        <span id="errorLiczbabud"  class="errors-text">Pole jest wymagane</span>
+        <div>
+            <p id="errorsSummary" class="errors-text">Furmularz zawiera błędy</p>
+            <input type="submit" class="form-button-submit" value="Dodaj" />
+            <a href="list.ejs" class="form-button-cancel">Anuluj</a>
+        </div>
+    </form>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

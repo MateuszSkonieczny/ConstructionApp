@@ -1,0 +1,57 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <div style="display: none">
+        <span id="errorMessage-required"><%= __('validationMessage.required') %></span>
+        <span id="errorMessage-s1"><%= __('validationMessage.s1') %></span>
+        <span id="errorMessage-s2"><%= __('validationMessage.s2') %></span>
+        <span id="errorMessage-s3"><%= __('validationMessage.s3') %></span>
+        <span id="errorMessage-b"><%= __('validationMessage.b') %></span>
+    </div>
+    <h2><%= pageTitle %></h2>
+    <!--    onsubmit="return validateNewFirmForm();"-->
+    <form class="form" method="post" action="<%=formAction%>" onsubmit="return validateNewFirmForm();">
+        <input type="hidden" name="firmId" value="<%= firm.Id %>">
+
+        <label for="Nazwa"><%= __('firm.fields.Nazwa') %>: <span class="symbol-required">*</span></label>
+        <input type="text" name="Nazwa" id="Nazwa" placeholder=<%= __('form.placeholders.symbolLimit') %> value="<%= firm.Nazwa %>" <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('Nazwa')) ? 'error-input' : '' %>" required/>
+
+        <span id="errorNazwa" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Nazwa'))) { %>
+                <%= validationErrors.find(e => e.path.includes('Nazwa')).message %>
+            <% } %>
+        </span>
+
+        <label for="Adres"><%= __('firm.fields.Adres') %>: <span class="symbol-required">*</span></label>
+        <input type="text" name="Adres" id="Adres" placeholder=<%= __('form.placeholders.symbolLimit') %> value="<%= firm.Adres %>" <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('Adres')) ? 'error-input' : '' %>" required/>
+
+        <span id="errorAdres" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Adres'))) { %>
+                <%= validationErrors.find(e => e.path.includes('Adres')).message %>
+            <% } %>
+        </span>
+
+
+        <label for="password"><%= __('firm.fields.Haslo') %>: <span class="symbol-required">*</span></label>
+        <input type="text" name="password" id="password" value="<%= firm.password %>" <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('password')) ? 'error-input' : '' %>" required/>
+
+        <span id="errorPassword" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('password'))) { %>
+                <%= validationErrors.find(e => e.path.includes('password')).message %>
+            <% } %>
+        </span>
+
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <input type="submit" class="form-button-submit" value="<%-btnLabel%>"/>
+            <a href="/firms" class="form-button-cancel"><%= __('form.actions.cancel') %></a>
+        </div>
+    </form>
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

@@ -1,0 +1,83 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <div style="display: none">
+        <span id="errorMessage-required"><%= __('validationMessage.required') %></span>
+        <span id="errorMessage-s1"><%= __('validationMessage.s1') %></span>
+        <span id="errorMessage-s2"><%= __('validationMessage.s2') %></span>
+        <span id="errorMessage-s3"><%= __('validationMessage.s3') %></span>
+        <span id="errorMessage-b"><%= __('validationMessage.b') %></span>
+        <span id="errorMessage-d"><%= __('validationMessage.d') %></span>
+        <span id="errorMessage-l"><%= __('validationMessage.l') %></span>
+    </div>
+    <h2><%= pageTitle %></h2>
+    <!--    onsubmit="return validateFirmEquipmentForm();"-->
+    <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateFirmEquipmentForm();">
+        <input type="hidden" name="firmEquipmentId" value="<%= firmEquipment.Id %>">
+
+        <label for="FId"><%= __('firmEquipments.fields.firm') %>: <span class="symbol-required">*</span></label>
+        <select name="FId" id="FId" <%= (formMode === 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('FId')) ? 'error-input' : '' %>" >
+            <option value=""><%= __('firmEquipments.fields.chooseFirm') %></option>
+            <% for (let i=0; i<allFirms.length; i++) { let firm = allFirms[i] %>
+            <% if (admin || (loggedUser && loggedUser.Nazwa === firm.Nazwa)) { %>
+            <option value="<%= firm.Id %>" label="<%= firm.Nazwa %>" <%= (firmEquipment.Firma && firm.Id.toString() === firmEquipment.Firma.Id.toString()) ? 'selected' : '' %>></option>
+            <% } %>
+            <% } %>
+        </select>
+        <span id="errorFirm" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('FId'))) { %>
+                <%= validationErrors.find(e => e.path.includes('FId')).message %>
+            <% } %>
+        </span>
+
+        <label for="SId"><%= __('firmEquipments.fields.tool') %>: <span class="symbol-required">*</span></label>
+        <select name="SId" id="SId" <%= (formMode === 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('SId')) ? 'error-input' : '' %>" >
+            <option value=""><%= __('firmEquipments.fields.chooseEquipment') %></option>
+            <% for (let i=0; i<allEquipments.length; i++) { let equipment = allEquipments[i] %>
+            <option value="<%= equipment.Id %>" label="<%= equipment.Nazwa %>" <%= (firmEquipment.Sprzet && equipment.Id.toString() === firmEquipment.Sprzet.Id.toString()) ? 'selected' : '' %>></option>
+            <% } %>
+        </select>
+        <span id="errorEquipment" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('SId'))) { %>
+                <%= validationErrors.find(e => e.path.includes('SId')).message %>
+            <% } %>
+        </span>
+
+        <label for="Ilosc"><%= __('firmEquipments.fields.quantity') %>: <span class="symbol-required">*</span></label>
+        <input type="number" name="Ilosc" id="Ilosc" placeholder=<%= __('form.placeholders.numLimit1') %> value="<%= firmEquipment.Ilosc %>" <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('Ilosc')) ? 'error-input' : '' %>" required/>
+        <span id="errorIlosc"  class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Ilosc'))) { %>
+                <%= validationErrors.find(e => e.path.includes('Ilosc')).message %>
+            <% } %>
+        </span>
+
+        <label for="Wypozyczone"><%= __('firmEquipments.fields.borrowed') %>: </label>
+        <input type="checkbox" name="Wypozyczone" id="Wypozyczone" <%= firmEquipment.Wypozyczone ? 'checked' : '' %> <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('Wypozyczone')) ? 'error-input' : '' %>" required/>
+        <span id="errorWypozyczone"  class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Wypozyczone'))) { %>
+                <%= validationErrors.find(e => e.path.includes('Wypozyczone')).message %>
+            <% } %>
+        </span>
+
+        <%if (formMode === 'showDetails') { %>
+            <div class="form-buttons">
+                <a href="/firmEquipments/edit/<%= firmEquipment.Id %>" class="list-actions-button-edit"><%= __('form.actions.edit') %></a>
+            </div>
+        <% } %>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+
+            <%if (formMode !== 'showDetails') { %>
+            <input type="submit" class="form-button-submit" value="<%-btnLabel%>"/>
+            <a href="/firmEquipments" class="form-button-cancel"><%= __('form.actions.cancel') %></a>
+            <% } else { %>
+                <a href="/firmEquipments" class="form-button-cancel"><%= __('form.actions.return') %></a>
+            <% } %>
+        </div>
+    </form>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

@@ -1,0 +1,38 @@
+<%- include('../../fragments/header.ejs') %>
+<main>
+    <div style="display: none">
+        <span id="errorMessage-required"><%= __('validationMessage.required') %></span>
+        <span id="errorMessage-b"><%= __('validationMessage.b') %></span>
+    </div>
+    <h2><%= __('opinion.list.opinie') %></h2>
+
+    <ol>
+    <% for (let opinion of opinions) { %>
+            <li><%= opinion.Tresc %></li>
+    <% } %>
+    </ol>
+
+    <form class="form" method="post" action="<%=formAction%>" onsubmit="return validateOpinion();" novalidate>
+        <input type="hidden" name="firmId" value="<%= id %>">
+
+        <label for="Tresc"><%= __('opinion.fields.Tresc') %>: <span class="symbol-required">*</span></label>
+        <input type="text" name="Tresc" id="Tresc" placeholder=<%= __('form.placeholders.symbolLimit255') %>
+               class="<%= validationErrors.find(e => e.path.includes('Tresc')) ? 'error-input' : '' %>" required/>
+
+        <span id="errorNazwa" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Tresc'))) { %>
+                <%= validationErrors.find(e => e.path.includes('Tresc')).message %>
+            <% } %>
+        </span>
+
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <input type="submit" class="form-button-submit" value="<%-btnLabel%>"/>
+            <a href="/firms/details/<%= id %>" class="form-button-cancel"><%= __('form.actions.cancel') %></a>
+        </div>
+    </form>
+
+
+</main>
+<%- include('../../fragments/footer.ejs') %>

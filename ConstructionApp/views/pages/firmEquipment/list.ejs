@@ -1,0 +1,39 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <h2><%= __('firmEquipments.list.pageTitle') %></h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th><%= __('firmEquipments.fields.firm') %></th>
+            <th><%= __('firmEquipments.fields.tool') %></th>
+            <th><%= __('firmEquipments.fields.quantity') %></th>
+            <th><%= __('firmEquipments.fields.borrowed') %></th>
+            <th><%= __('list.actions.title') %></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% for (let feq of firmEquipments) { %>
+            <% if (admin || (loggedUser && loggedUser.Nazwa === feq.fNazwa)) { %>
+            <tr>
+                <td><%= feq.fNazwa %></td>
+                <td><%= feq.sNazwa %></td>
+                <td><%= feq.Ilosc %></td>
+                <td><%= feq.Wypozyczone === 1 ? 'tak' : 'nie' %></td>
+                <td>
+                    <ul class="list-actions">
+                        <li><a href="firmEquipments/details/<%= feq.Id%>" class="list-actions-button-details"><%= __('list.actions.details') %></a></li>
+                        <li><a href="firmEquipments/edit/<%= feq.Id%>" class="list-actions-button-edit"><%= __('list.actions.edit') %></a></li>
+                        <li><a href="firmEquipments/delete/<%= feq.Id%>" class="list-actions-button-delete"><%= __('list.actions.delete') %></a></li>
+                    </ul>
+                </td>
+            </tr>
+            <% } %>
+        <% } %>
+        </tbody>
+    </table>
+    <p><a href="firmEquipments/add" class="button-add"><%= __('firmEquipments.list.addNew') %></a></p>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

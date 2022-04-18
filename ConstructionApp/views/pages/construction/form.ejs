@@ -1,0 +1,92 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+    <div style="display: none">
+        <span id="errorMessage-required"><%= __('validationMessage.required') %></span>
+        <span id="errorMessage-s1"><%= __('validationMessage.s1') %></span>
+        <span id="errorMessage-s2"><%= __('validationMessage.s2') %></span>
+        <span id="errorMessage-s3"><%= __('validationMessage.s3') %></span>
+        <span id="errorMessage-b"><%= __('validationMessage.b') %></span>
+        <span id="errorMessage-d"><%= __('validationMessage.d') %></span>
+    </div>
+    <h2><%= pageTitle %></h2>
+<!--    onsubmit="return validateConstructionForm();"-->
+    <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateConstructionForm();">
+        <input type="hidden" name="constructionId" value="<%= construction.Id %>">
+
+        <label for="FId"><%= __('constructions.fields.firm') %>: <span class="symbol-required">*</span></label>
+        <select name="FId" id="FId" <%= (formMode === 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('FId')) ? 'error-input' : '' %>" >
+            <option value=""><%= __('constructions.fields.chooseFirm') %></option>
+            <% for (let i=0; i<allFirms.length; i++) { let firm = allFirms[i] %>
+            <% if (admin || (loggedUser && loggedUser.Nazwa === firm.Nazwa)) { %>
+                <option value="<%= firm.Id %>" label="<%= firm.Nazwa %>" <%= (construction.Firma && firm.Id.toString() === construction.Firma.Id.toString()) ? 'selected' : '' %>></option>
+            <% } %>
+            <% } %>
+        </select>
+        <span id="errorFirm" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('FId'))) { %>
+                <%= validationErrors.find(e => e.path.includes('FId')).message %>
+            <% } %>
+        </span>
+
+        <label for="OId"><%= __('constructions.fields.estate') %>: <span class="symbol-required">*</span></label>
+        <select name="OId" id="OId" <%= (formMode === 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('OId')) ? 'error-input' : '' %>" >
+            <option value=""><%= __('constructions.fields.chooseEstate') %></option>
+            <% for (let i=0; i<allEstates.length; i++) { let estate = allEstates[i] %>
+            <option value="<%= estate.Id %>" label="<%= estate.Adres %>" <%= (construction.Osiedle && estate.Id.toString() === construction.Osiedle.Id.toString()) ? 'selected' : '' %>></option>
+            <% } %>
+        </select>
+        <span id="errorEstate" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('OId'))) { %>
+                <%= validationErrors.find(e => e.path.includes('OId')).message %>
+            <% } %>
+        </span>
+
+        <label for="ImieManagera"><%= __('constructions.fields.managerName') %>: <span class="symbol-required">*</span></label>
+        <input type="text" name="ImieManagera" id="ImieManagera" placeholder=<%= __('form.placeholders.symbolLimit') %> value="<%= construction.ImieManagera %>" <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('ImieManagera')) ? 'error-input' : '' %>" required/>
+        <span id="errorIM"  class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('ImieManagera'))) { %>
+                <%= validationErrors.find(e => e.path.includes('ImieManagera')).message %>
+            <% } %>
+        </span>
+
+        <label for="NazwiskoManagera"><%= __('constructions.fields.managerLastNameShort') %>: <span class="symbol-required">*</span></label>
+        <input type="text" name="NazwiskoManagera" id="NazwiskoManagera" placeholder=<%= __('form.placeholders.symbolLimit') %> value="<%= construction.NazwiskoManagera %>" <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('NazwiskoManagera')) ? 'error-input' : '' %>" required/>
+        <span id="errorNM"  class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('NazwiskoManagera'))) { %>
+                <%= validationErrors.find(e => e.path.includes('NazwiskoManagera')).message %>
+            <% } %>
+        </span>
+
+        <label for="DataZakonczenia"><%= __('constructions.fields.endDate') %>: </label>
+        <input type="date" name="DataZakonczenia" id="DataZakonczenia" value="<%= construction.DataZakonczenia %>"
+                <%= (formMode === 'showDetails') ? 'disabled' : '' %>
+               class="<%= validationErrors.find(e => e.path.includes('DataZakonczenia')) ? 'error-input' : '' %>" />
+        <span id="errorDZ"  class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('DataZakonczenia'))) { %>
+                <%= validationErrors.find(e => e.path.includes('DataZakonczenia')).message %>
+            <% } %>
+        </span>
+
+        <%if (formMode === 'showDetails') { %>
+            <div class="form-buttons">
+                <a href="/constructions/edit/<%= construction.Id %>" class="list-actions-button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+
+            <%if (formMode !== 'showDetails') { %>
+                <input type="submit" class="form-button-submit" value="<%-btnLabel%>"/>
+                <a href="/constructions" class="form-button-cancel"><%= __('form.actions.cancel') %></a>
+            <% } else { %>
+                <a href="/constructions" class="form-button-cancel"><%= __('form.actions.return') %></a>
+            <% } %>
+        </div>
+    </form>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>
